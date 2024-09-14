@@ -16,7 +16,9 @@ function Message() {
   const fetchAllChatrooms = async () => {
     const req = await fetch(`http://localhost:5000/chatrooms/${getUserId()}`)
     const d = await req.json()
+    console.log("chatrroom fetch data ",d)
     const roomIds =d.data.map((e) =>e && e._id )
+    console.log("filter room ids ",roomIds)
     setRooms(roomIds);
     setChats(d.data)
   }
@@ -35,15 +37,14 @@ return timeString
 
   const logger = () => {
     console.log("logger")
-    console.log({ rooms })
     console.log({ chats })
     console.log("in logger")
     chats.map((e)=>console.log(e._id))
   }
   useEffect(() => {
     fetchAllChatrooms()
-    // console.log({chats})
-    // logger()
+    console.log({chats})
+    logger()
   }, [])
   let location = useLocation().pathname;
 
@@ -76,10 +77,10 @@ return timeString
 
               {/* message lists */}
               {chats.map((message, ind) => (
-               <Link to={`user1`} key={ind}
+                message &&  <Link to={`user1`} key={ind}
                   state={{ id: message._id }}
                 >
-                  <div className="flex justify-between bg-[#9b8d8d] items-center py-3 border-b px-2 md:px-4 hover:bg-gray-100">
+                 <div className="flex justify-between bg-[#9b8d8d] items-center py-3 border-b px-2 md:px-4 hover:bg-gray-100">
                     <div className="flex items-center gap-2">
                       <img
                         // src={''}

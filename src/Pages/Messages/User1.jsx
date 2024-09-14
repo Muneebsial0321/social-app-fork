@@ -95,6 +95,7 @@ function Message2() {
   };
 
   useEffect(() => {
+    console.log("state changed",loc.state.id)
     // const params = new URLSearchParams(window.location.search);
     // const accessToken = params.get('access_token');
     fetchChatroom(loc.state.id)
@@ -118,7 +119,7 @@ function Message2() {
       socket.off('previousMessages');
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);  // Depend on the user PK
+  }, [loc.state.id]);  // Depend on the user PK
   const handleInputChange = (e) => {
     setMessage(e.target.value);
   };
