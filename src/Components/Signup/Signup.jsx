@@ -70,6 +70,13 @@ const Signup = () => {
     setSelectedRole(role);
   };
 
+  const googleLogin=async()=>{
+   const req = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/google`, {
+      method: 'GET',
+      credentials: 'include' // Ensure cookies are sent with the request
+    })
+  }
+
   useEffect(() => {
     if (location.pathname === "/signin") {
       setSignUp(false);
